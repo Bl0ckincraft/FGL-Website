@@ -1,0 +1,271 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "theme.scss";
+@import "loader.scss";
+@import "header.scss";
+@import "background.scss";
+@import "home.scss";
+@import "footer.scss";
+@import "security";
+@import "toastr.min.css";
+@import "account";
+@import "admin";
+
+@font-face {
+    font-family: 'Albas';
+    src: url("../fonts/ALBAS.TTF");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Albas Filled';
+    src: url("../fonts/ALBAS_FILLED.TTF");
+    font-display: swap;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+    background-color: var(--main-color);
+    color: var(--text-color);
+    user-select: none;
+}
+
+.darker-hover {
+    transition: ease-in-out background-color .3s;
+}
+
+.darker-hover:hover {
+    background-color: var(--darker-background);
+}
+
+hr {
+    border-color: var(--text-color);
+}
+
+.container {
+    transition: ease-in-out max-width .5s;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style pour les labels */
+form label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+/* Style pour les inputs */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form input[type="datetime-local"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--main-color-variant);
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--main-color-variant);
+}
+
+/* Suppression des petites flèches pour les inputs de type number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Pour Firefox */
+}
+
+/* Style pour les range picker (barre de défilement) */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: var(--main-color-variant);
+    outline: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="range"]:hover {
+    background-color: var(--accent-color-variant);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    background-color: var(--accent-color-variant);
+}
+
+/* Style pour les calendar pickers */
+input[type="datetime-local"] {
+    padding: 10px;
+    border: 1px solid var(--main-color-variant);
+    border-radius: 5px;
+    background-color: var(--main-color-variant);
+    font-size: 14px;
+}
+
+/* Effets de focus sur les inputs */
+form input:focus,
+form textarea:focus,
+form select:focus,
+form input[type="datetime-local"]:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(var(--accent-color-rgb), 0.4);
+    outline: none;
+}
+
+/* Style pour le bouton */
+form button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet hover sur le bouton */
+form button:hover {
+    background-color: var(--accent-color-variant);
+}
+
+/* Amélioration du label au survol */
+form label:hover {
+    color: var(--accent-color);
+}
+
+/* Ajout d'un effet sur les champs obligatoires */
+form input:required {
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Style pour les erreurs (symfony form errors) */
+.form-error {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Style pour les messages de succès */
+.form-success {
+    color: #4CAF50;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    appearance: none; /* Cache le style par défaut de la checkbox */
+    background-color: #fff;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color-variant);
+    box-shadow: 0 0 8px rgba(var(--accent-color-rgb), 0.4);
+}
+
+input[type="checkbox"]:checked:after {
+    content: '\2714'; /* Symbole "check" */
+    color: white;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    line-height: 18px;
+}
+
+/* Style pour le champ de fichier */
+form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--main-color-variant);
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+    display: none;
+}
+
+::file-selector-button {
+    display: none;
+}
+
+form input[type="color"] {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 1px solid var(--main-color-variant);
+    border-radius: 5px;
+    background-color: var(--main-color-variant);
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+}
+
+form input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+}

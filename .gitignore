@@ -35,3 +35,8 @@ yarn-error.log
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+.env
+.idea/FGL Website.iml
+.env
+migrations/Version20241019133024.php
+migrations/Version20241019181212.php
