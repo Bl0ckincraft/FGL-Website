@@ -108,11 +108,9 @@ class JwtAuthController extends AbstractController
     #[Route(path: '/api/mods', name: 'api_mods', methods: ["GET"])]
     public function mods(Request $request): JsonResponse
     {
-        dd($request);
         $mods = [];
         /** @var string $baseUrl */
-        $baseUrl = $request->server->get("SYMFONY_DEFAULT_ROUTE_URL");
-        $baseUrl = substr($baseUrl, 0, strlen($baseUrl) - 1);
+        $baseUrl = $request->server->get("HTTP_HOST");
 
         foreach ($this->entityManager->getRepository(Mod::class)->findAll() as $mod) {
             $mods[] = [
@@ -133,8 +131,7 @@ class JwtAuthController extends AbstractController
     {
         $news = [];
         /** @var string $baseUrl */
-        $baseUrl = $request->server->get("SYMFONY_DEFAULT_ROUTE_URL");
-        $baseUrl = substr($baseUrl, 0, strlen($baseUrl) - 1);
+        $baseUrl = $request->server->get("HTTP_HOST");
 
         /** @var News $newsIn */
         foreach ($this->entityManager->getRepository(News::class)->findAll() as $newsIn) {
