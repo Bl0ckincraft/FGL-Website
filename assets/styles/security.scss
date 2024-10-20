@@ -1,0 +1,34 @@
+#security {
+  .form-title {
+    text-transform: uppercase;
+    font-family: var(--albas-font);
+    text-shadow: 0 0 15px var(--accent-color), 0 0 20px var(--accent-color);
+    transition: ease-in-out font-size .5s;
+  }
+
+  .form-title::before {
+    content: attr(content);
+    position: absolute;
+    font-family: var(--albas-filled-font);
+    color: rgba(var(--accent-color-rgb), 0.6);
+    z-index: -1;
+  }
+
+  .form-title {
+    font-size: 60px;
+    line-height: 70px;
+  }
+  
+  @media (max-width: 640px) {
+    .form-title {
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+
+  ul li {
+    color: var(--useful-color-red);
+    margin-bottom: 2px;
+    font-size: 13px;
+  }
+}

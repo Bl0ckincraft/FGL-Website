@@ -1,0 +1,168 @@
+header {
+  background-color: rgba(var(--main-color-rgb), .6);
+  padding: 20px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, var(--shadow-opacity));
+
+  &.flying-header {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .icon {
+    height: 64px;
+  }
+
+  .menu-switch i {
+    height: 64px;
+    width: 64px;
+    text-align: center;
+  }
+
+  #menu {
+    top: 0;
+    left: -100%;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    transition: ease-in-out left .3s;
+    display: flex;
+    flex-direction: row;
+  }
+
+  #menu.enabled {
+    left: 0;
+  }
+
+  #menu #menu-content {
+    background-color: var(--main-color);
+    height: 100%;
+    min-width: min(300px, 100%);
+    max-width: 400px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 0 15px rgba(0, 0, 0, var(--shadow-opacity));
+  }
+
+  #menu-content .icon {
+    height: 64px;
+  }
+
+  #menu-modal {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    display: none;
+    z-index: 9;
+    transition: ease-in-out background-color .3s;
+  }
+
+  @keyframes progressive-blur {
+    0% {
+      backdrop-filter: blur(0);
+    }
+    100% {
+      backdrop-filter: blur(2px);
+    }
+  }
+
+  #menu.enabled #menu-modal {
+    display: block;
+    background-color: var(--darker-background);
+    animation: progressive-blur ease-in-out forwards .3s;
+  }
+
+  .main-theme-settings, .accent-theme-settings {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 5px auto;
+  }
+
+  .main-theme-color, .accent-theme-color {
+    cursor: pointer;
+    min-width: 25px;
+    max-width: 25px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 1px solid rgba(var(--opposite-main-color-rgb), 0.4);
+    color: var(--accent-color);
+  }
+
+  .main-theme-color.dark-theme, .accent-theme-color.dark-theme {
+    background-color: #1A1A20FF;
+  }
+
+  .main-theme-color.light-theme, .accent-theme-color.light-theme {
+    background-color: #F0F0F0FF;
+  }
+
+  .main-theme-color.pink-accent-theme, .accent-theme-color.pink-accent-theme {
+    background-color: #FF00D9FF;
+  }
+
+  .main-theme-color.yellow-accent-theme, .accent-theme-color.yellow-accent-theme {
+    background-color: #FFFF00FF;
+  }
+
+  .main-theme-color.blue-accent-theme, .accent-theme-color.blue-accent-theme {
+    background-color: #009DFFFF;
+  }
+
+  .main-theme-color.green-accent-theme-theme, .accent-theme-color.green-accent-theme {
+    background-color: #00FF00FF;
+  }
+
+  #menu .theme-manager-part {
+    font-family: Circular, ui-sans-serif, system-ui;
+  }
+
+  #menu .nav-items-part .nav-item {
+    width: 100%;
+    transition: ease-in-out background-color .5s;
+    cursor: pointer;
+  }
+
+  :root[theme="light"] #menu .nav-items-part .nav-item {
+    filter: brightness(0.8);
+  }
+
+  :root[theme="dark"] #menu .nav-items-part .nav-item span {
+    filter: saturate(0.8);
+  }
+
+  #menu .nav-items-part .nav-item:hover {
+    --nav-item-alpha: .2
+  }
+
+  #menu .nav-items-part .nav-item:nth-child(1) {
+    background-color: rgba(var(--useful-color-dark-theme-yellow-rgb), var(--nav-item-alpha, .1));
+    color: rgb(var(--useful-color-dark-theme-yellow-rgb));
+  }
+
+  #menu .nav-items-part .nav-item:nth-child(2) {
+    background-color: rgba(var(--useful-color-dark-theme-green-rgb), var(--nav-item-alpha, .1));
+    color: rgb(var(--useful-color-dark-theme-green-rgb));
+  }
+
+  #menu .nav-items-part .nav-item:nth-child(3) {
+    background-color: rgba(var(--useful-color-dark-theme-blue-rgb), var(--nav-item-alpha, .1));
+    color: rgb(var(--useful-color-dark-theme-blue-rgb));
+  }
+
+  #menu .nav-items-part .nav-item:nth-child(4) {
+    background-color: rgba(var(--useful-color-dark-theme-purple-rgb), var(--nav-item-alpha, .1));
+    color: rgb(var(--useful-color-dark-theme-purple-rgb));
+  }
+
+  #menu .nav-items-part .nav-item:nth-child(5) {
+    background-color: rgba(var(--useful-color-dark-theme-pink-rgb), var(--nav-item-alpha, .1));
+    color: rgb(var(--useful-color-dark-theme-pink-rgb));
+  }
+}

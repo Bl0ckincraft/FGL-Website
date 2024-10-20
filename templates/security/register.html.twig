@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "register.title"|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex flex-col">
+        {% include 'partials/header.html.twig' %}
+
+        <div class="mx-auto my-auto container max-w-[800px]" id="security">
+            <div class="mx-4 my-[5.5rem]">
+                {{ form_start(form) }}
+                    <h1 class="my-2 text-center mx-auto form-title" content="{{ "register"|trans }}">{{ "register"|trans }}</h1>
+
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.password) }}
+                    {{ form_row(form.submit, { 'attr': {'class': 'mb-2 mt-4'} }) }}
+                    <hr class="my-2">
+                    <div class="my-2">
+                        <a href="{{ path("app_login") }}" class="mb-3">J'ai déjà un compte...</a>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

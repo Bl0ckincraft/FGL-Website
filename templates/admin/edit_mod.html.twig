@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "admin.mods.title"|trans }} | {{ "admin.edit"|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <div id="admin" class="container mx-auto flex flex-col my-10">
+        <h1 class="title mx-auto mb-10" content="{{ "admin.mods.title"|trans }}">{{ "admin.mods.title"|trans }}</h1>
+
+        {{ form_start(form) }}
+            <div class="mx-auto">
+                <h1 class="mt-2 mb-5 text-center mx-4 title" content="{{ "admin.edit"|trans }}">{{ "admin.edit"|trans }}</h1>
+            </div>
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.modFile) }}
+
+            <button type="submit" class="my-3 mx-4">{{ "admin.edit"|trans }}</button>
+        {{ form_end(form) }}
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

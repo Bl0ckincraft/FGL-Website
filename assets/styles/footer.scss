@@ -1,0 +1,42 @@
+footer {
+  &.flying-footer {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .footer-link {
+    cursor: pointer;
+    transition: ease-in-out .5s;
+    position: relative;
+    white-space: nowrap;
+
+    a {
+      display: block;
+    }
+
+    ::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--text-color);
+      transition: width 0.5s ease-in-out;
+      transform-origin: left;
+      pointer-events: none;
+    }
+
+    :hover::after {
+      width: 100%;
+    }
+  }
+
+  background-color: rgba(var(--main-color-rgb), .6);
+  padding: 20px;
+  box-shadow: 0 -10px 15px rgba(0, 0, 0, var(--shadow-opacity));
+}

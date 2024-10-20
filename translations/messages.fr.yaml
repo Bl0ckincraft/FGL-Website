@@ -1,0 +1,46 @@
+loading: "Chargement..."
+welcome: "Accueil"
+description: ""
+home:
+  title: "Accueil"
+  step:
+    1: "Étape 1 : Java"
+    2: "Étape 2 : Launcher"
+    3: "Étape 3 : Jouer"
+register:
+  title: "Inscription"
+login:
+  title: "Connexion"
+account:
+  title: "Mon Compte"
+admin:
+  title: "Panel Admin"
+  add: "Ajouter"
+  edit: "Modifier"
+  delete: "Supprimer"
+  mods:
+    title: "Gérer les mods"
+  news:
+    title: "Gérer les news"
+menu:
+  menu: "Menu"
+  mainTheme: "Thème Principal"
+  secondaryTheme: "Thème Secondaire"
+  download:
+    title: "Téléchargement"
+    description: "Accéder au lien de téléchargement du launcher!"
+  login:
+    title: "Connexion"
+    description: "Je veux me connecter pour pouvoir jouer!"
+  register:
+    title: "Inscription"
+    description: "Je veux créer mon compte et pouvoir jouer!"
+  account:
+    title: "Mon compte"
+    description: "Accéder à la gestion de mon compte!"
+  logout:
+    title: "Déconnexion"
+    description: "Clique ici pour te déconnecter!"
+  admin:
+    title: "Panel Admin"
+    description: "Accéder au panel administrateur!"

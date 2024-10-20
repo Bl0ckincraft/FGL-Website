@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "account.title"|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex flex-col" id="account">
+        {% include 'partials/header.html.twig' %}
+
+        <div class="mx-auto my-auto container max-w-[800px]" id="security">
+            <div class="mx-4 my-[5.5rem]">
+                {{ form_start(form) }}
+                    <h1 class="my-2 text-center mx-auto form-title" content="{{ app.user.username }}">{{ app.user.username }}</h1>
+
+                    <label for="email" class="mt-3">Adresse Email</label>
+                    <input type="text" id="email" value="{{ app.user.email }}" required disabled>
+
+                    <label for="uuid" class="mt-3">UUID</label>
+                    <input type="text" id="uuid" value="{{ app.user.uuid }}" required disabled>
+
+                    {{ form_row(form.skin) }}
+
+                    <img class="skin my-8" alt="Skin Actuel" src="{{ path('app_skin', {
+                        "uuid": app.user.uuid
+                    }) }}"/>
+
+                    {{ form_row(form.submit) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

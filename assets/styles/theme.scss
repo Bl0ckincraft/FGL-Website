@@ -1,0 +1,154 @@
+:root {
+    --font: 'Noto Sans', sans-serif;
+    --albas-font: 'Albas', sans-serif;
+    --albas-filled-font: 'Albas Filled', sans-serif;
+}
+
+/*
+:root[theme="dark"] {
+    --wave-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='%23202020'/%3E%3C/svg%3E");
+    --icon-brightness: 1;
+
+    --main-color: rgb(26, 26, 32);
+    --main-color-rgb: 26, 26, 32;
+    --main-color-variant: rgb(8, 8, 8);
+    --main-color-variant-rgb: 8, 8, 8;
+
+    --darker-background: rgba(8, 8, 8, .4);
+    --shadow-opacity: .3;
+
+    --opposite-main-color: rgb(245, 245, 245);
+    --opposite-main-color-rgb: 245, 245, 245;
+    --opposite-main-color-variant: rgb(215, 215, 215);
+    --opposite-main-color-variant-rgb: 215, 215, 215;
+
+    --text-color: rgb(255, 255, 255);
+    --text-color-rgb: 255, 255, 255;
+    --text-color-variant: rgb(192, 192, 192);
+    --text-color-variant-rgb: 192, 192, 192;
+
+    --theme-pink-color-rgb: 255, 0, 217;
+    --theme-pink-variant-color-rgb: 128, 0, 108;
+    --theme-yellow-color-rgb: 225, 225, 0;
+    --theme-yellow-variant-color-rgb: 128, 128, 0;
+    --theme-blue-color-rgb: 0, 157, 255;
+    --theme-blue-variant-color-rgb: 0, 75, 128;
+    --theme-green-color-rgb: 0, 255, 0;
+    --theme-green-variant-color-rgb: 0, 128, 0;
+
+    --usefull-color-yellow: #f9b234;
+    --usefull-color-green: #3ecd5e;
+    --usefull-color-blue: #0295e4;
+    --usefull-color-purple: #952aff;
+    --usefull-color-pink: #cd3e94;
+}
+
+:root[theme="dark"][accent-theme="pink"] {
+    --icon-hue-rotate: 250deg;
+
+    --primary-color: rgb(var(--theme-pink-color-rgb));
+    --primary-color-rgb: var(--theme-pink-color-rgb);
+    --primary-color-variant: rgb(var(--theme-pink-variant-color-rgb));
+    --primary-color-variant-rgb: var(--theme-pink-variant-color-rgb);
+}
+
+:root[theme="dark"][accent-theme="yellow"] {
+    --icon-hue-rotate: 20deg;
+
+    --primary-color: rgb(var(--theme-yellow-color-rgb));
+    --primary-color-rgb: var(--theme-yellow-color-rgb);
+    --primary-color-variant: rgb(var(--theme-yellow-variant-color-rgb));
+    --primary-color-variant-rgb:var(--theme-yellow-variant-color-rgb);
+}
+
+:root[theme="dark"][accent-theme="blue"] {
+    --icon-hue-rotate: 170deg;
+
+    --primary-color: rgb(var(--theme-blue-color-rgb));
+    --primary-color-rgb: var(--theme-blue-color-rgb);
+    --primary-color-variant: rgb(var(--theme-blue-variant-color-rgb));
+    --primary-color-variant-rgb: var(--theme-blue-variant-color-rgb);
+}
+
+:root[theme="dark"][accent-theme="green"] {
+    --icon-hue-rotate: 80deg;
+
+    --primary-color: rgb(var(--theme-green-color-rgb));
+    --primary-color-rgb: var(--theme-green-color-rgb);
+    --primary-color-variant: rgb(var(--theme-green-variant-color-rgb));
+    --primary-color-variant-rgb: var(--theme-green-variant-color-rgb);
+}
+
+:root[theme="light"] {
+    --wave-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='%23E4E4E4'/%3E%3C/svg%3E");
+    --icon-brightness: .9;
+
+    --main-color: rgb(240, 240, 240);
+    --main-color-rgb: 240, 240, 240;
+    --main-color-variant: rgb(255, 255, 255);
+    --main-color-variant-rgb: 255, 255, 255;
+
+    --darker-background: rgba(8, 8, 8, .1);
+    --shadow-opacity: .15;
+
+    --opposite-main-color: rgb(30, 30, 30);
+    --opposite-main-color-rgb: 30, 30, 30;
+    --opposite-main-color-variant: rgb(60, 60, 60);
+    --opposite-main-color-variant-rgb: 60, 60, 60;
+
+    --text-color: rgb(0, 0, 0);
+    --text-color-rgb: 0, 0, 0;
+    --text-color-variant: rgb(128, 128, 128);
+    --text-color-variant-rgb: 128, 128, 128;
+
+    --theme-pink-color-rgb: 255, 173, 217;
+    --theme-pink-variant-color-rgb: 212, 110, 144;
+    --theme-yellow-color-rgb: 255, 255, 0;
+    --theme-yellow-variant-color-rgb: 200, 200, 0;
+    --theme-blue-color-rgb: 173, 216, 255;
+    --theme-blue-variant-color-rgb: 110, 144, 212;
+    --theme-green-color-rgb: 144, 212, 110;
+    --theme-green-variant-color-rgb: 110, 144, 70;
+
+    --usefull-color-yellow: #fbd87c;
+    --usefull-color-green: #6efa8b;
+    --usefull-color-blue: #72b8f6;
+    --usefull-color-purple: #b79dff;
+    --usefull-color-pink: #f178c5;
+}
+
+:root[theme="light"][accent-theme="pink"] {
+    --icon-hue-rotate: 250deg;
+
+    --primary-color: rgb(var(--theme-pink-color-rgb));
+    --primary-color-rgb: var(--theme-pink-color-rgb);
+    --primary-color-variant: rgb(var(--theme-pink-variant-color-rgb));
+    --primary-color-variant-rgb: var(--theme-pink-variant-color-rgb);
+}
+
+:root[theme="light"][accent-theme="yellow"] {
+    --icon-hue-rotate: 20deg;
+
+    --primary-color: rgb(var(--theme-yellow-color-rgb));
+    --primary-color-rgb: var(--theme-yellow-color-rgb);
+    --primary-color-variant: rgb(var(--theme-yellow-variant-color-rgb));
+    --primary-color-variant-rgb:var(--theme-yellow-variant-color-rgb);
+}
+
+:root[theme="light"][accent-theme="blue"] {
+    --icon-hue-rotate: 170deg;
+
+    --primary-color: rgb(var(--theme-blue-color-rgb));
+    --primary-color-rgb: var(--theme-blue-color-rgb);
+    --primary-color-variant: rgb(var(--theme-blue-variant-color-rgb));
+    --primary-color-variant-rgb: var(--theme-blue-variant-color-rgb);
+}
+
+:root[theme="light"][accent-theme="green"] {
+    --icon-hue-rotate: 80deg;
+
+    --primary-color: rgb(var(--theme-green-color-rgb));
+    --primary-color-rgb: var(--theme-green-color-rgb);
+    --primary-color-variant: rgb(var(--theme-green-variant-color-rgb));
+    --primary-color-variant-rgb: var(--theme-green-variant-color-rgb);
+}*/

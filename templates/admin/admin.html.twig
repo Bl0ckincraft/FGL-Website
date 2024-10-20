@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "admin.title"|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <div id="admin" class="container mx-auto flex flex-col my-6">
+        <h1 class="title mx-auto" content="{{ "admin.title"|trans }}">{{ "admin.title"|trans }}</h1>
+
+        <div class="flex flex-row flex-wrap mt-12 justify-center gap-10">
+            {% set paths = {"app_admin_mods": "Gérer les mods", "app_admin_news": "Gérer les news"} %}
+
+            {% for pa, name in paths %}
+                <a href="{{ path(pa) }}" class="card-container rounded-2xl h-[300px] w-full lg:w-1/2 xl:w-1/3 p-5 flex flex-col">
+                    <p class="text-center my-auto mx-auto font-extrabold text-xl">{{ name }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

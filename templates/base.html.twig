@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.getLocale() }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="{{ "description"|trans }}">
+        <title>FGL | {% block title %}{% endblock %}</title>
+        <link rel="icon" href="{{ asset("images/icon.webp") }}">
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="{{ asset("js/toastr.min.js") }}"></script>
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="min-h-screen flex flex-col">
+        {% if notifications is defined %}
+            {% for notification in notifications %}
+                <div class="{{ notification['type'] }}">{{ notification['message'] }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <div id="loader-wrapper" style="position: fixed; top: 0; left: 0; height: 100%; width: 100%; background-color: rgb(8, 8, 8);">
+            <div class="loader-content">
+                <span class="main-loader"></span>
+                <span class="loading-title">{{ "loading"|trans }}</span>
+            </div>
+        </div>
+
+        <div id="background"></div>
+
         {% block body %}{% endblock %}
+
+        <script src="https://kit.fontawesome.com/ac8a9b7e7f.js" crossorigin="anonymous"></script>
     </body>
 </html>

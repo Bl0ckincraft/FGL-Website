@@ -1,0 +1,114 @@
+<header class="{% if flyingHeader is defined %}flying-header{% endif %}">
+    <div class="container flex flex-row mx-auto items-center">
+        <a class="flex flex-row items-center p-1 rounded-2xl title-part darker-hover pe-2" href="{{ path('app_home') }}">
+            <img class="icon" alt="logo" src="{{ asset("images/icon.webp") }}"/>
+            {% if app.user %}
+                <span class="text-xl sm:text-2xl mx-2 font-semibold uppercase">{{ app.user.username }}</span>
+            {% endif %}
+        </a>
+        <div class="menu-switch flex flex-row items-center ms-auto rounded-2xl darker-hover interact-part">
+            <i class=" fa-solid fa-bars text-3xl p-4"></i>
+        </div>
+    </div>
+    <div id="menu">
+        <div id="menu-content" class="p-4 overflow-y-scroll">
+            <div class="menu-switch rounded-2xl p-3 darker-hover top-part flex flex-row items-center">
+                <img class="icon" alt="logo" src="{{ asset("images/icon.webp") }}"/>
+                <div class="mx-auto">
+                    <span class="text-2xl uppercase font-bold">{{ "menu.menu"|trans }}</span>
+                </div>
+                <div>
+                    <i class="text-3xl fa-solid fa-xmark p-4"></i>
+                </div>
+            </div>
+
+            <hr class="my-4"/>
+
+            <div class="nav-items-part mb-auto pt-4 mx-3 flex flex-col gap-5">
+                <a href="{{ path('app_home') }}#download" class="nav-item p-4 rounded-lg flex flex-col gap-1 mx-auto">
+                    <div class="nav-title-container text-lg font-bold">
+                        <span class="nav-title"><i class="fa-solid fa-download pe-2"></i>{{ "menu.download.title"|trans }}</span>
+                    </div>
+                    <div class="nav-description-container text-base">
+                        <span class="nav-description">{{ "menu.download.description"|trans }}</span>
+                    </div>
+                </a>
+                {% if app.user %}
+                    <a href="{{ path('app_account') }}" class="nav-item p-4 rounded-lg flex flex-col gap-1 mx-auto">
+                        <div class="nav-title-container text-lg font-bold">
+                            <span class="nav-title"><i class="fa-solid fa-user pe-2"></i>{{ "menu.account.title"|trans }}</span>
+                        </div>
+                        <div class="nav-description-container text-base">
+                            <span class="nav-description">{{ "menu.account.description"|trans }}</span>
+                        </div>
+                    </a>
+                    <a href="{{ path('app_logout') }}" class="nav-item p-4 rounded-lg flex flex-col gap-1 mx-auto">
+                        <div class="nav-title-container text-lg font-bold">
+                            <span class="nav-title"><i class="fa-solid fa-right-from-bracket pe-2"></i>{{ "menu.logout.title"|trans }}</span>
+                        </div>
+                        <div class="nav-description-container text-base">
+                            <span class="nav-description">{{ "menu.logout.description"|trans }}</span>
+                        </div>
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_admin') }}" class="nav-item p-4 rounded-lg flex flex-col gap-1 mx-auto">
+                            <div class="nav-title-container text-lg font-bold">
+                                <span class="nav-title"><i class="fa-solid fa-chess-king pe-2"></i>{{ "menu.admin.title"|trans }}</span>
+                            </div>
+                            <div class="nav-description-container text-base">
+                                <span class="nav-description">{{ "menu.admin.description"|trans }}</span>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="nav-item p-4 rounded-lg flex flex-col gap-1 mx-auto">
+                        <div class="nav-title-container text-lg font-bold">
+                            <span class="nav-title"><i class="fa-solid fa-key pe-2"></i>{{ "menu.login.title"|trans }}</span>
+                        </div>
+                        <div class="nav-description-container text-base">
+                            <span class="nav-description">{{ "menu.login.description"|trans }}</span>
+                        </div>
+                    </a>
+                    <a href="{{ path('app_register') }}" class="nav-item p-4 rounded-lg flex flex-col gap-1 mx-auto">
+                        <div class="nav-title-container text-lg font-bold">
+                            <span class="nav-title"><i class="fa-solid fa-plus pe-2"></i>{{ "menu.register.title"|trans }}</span>
+                        </div>
+                        <div class="nav-description-container text-base">
+                            <span class="nav-description">{{ "menu.register.description"|trans }}</span>
+                        </div>
+                    </a>
+                {% endif %}
+            </div>
+
+            <hr class="my-4"/>
+
+            <div class="theme-manager-part flex flex-col">
+                <div class="mx-auto">
+                    <span class="text-center text-base font-bold uppercase">{{ "menu.mainTheme"|trans }}</span>
+                </div>
+                <div class="main-theme-settings">
+                    <div class="main-theme-color dark-theme" data-color="dark">
+                    </div>
+                    <div class="main-theme-color light-theme" data-color="light">
+                    </div>
+                </div>
+                <div class="mx-auto mt-1">
+                    <span class="text-center text-base font-bold uppercase">{{ "menu.secondaryTheme"|trans }}</span>
+                </div>
+                <div class="accent-theme-settings">
+                    <div class="accent-theme-color pink-accent-theme" data-color="pink">
+                    </div>
+                    <div class="accent-theme-color yellow-accent-theme" data-color="yellow">
+                    </div>
+                    <div class="accent-theme-color blue-accent-theme" data-color="blue">
+                    </div>
+                    <div class="accent-theme-color green-accent-theme" data-color="green">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="menu-modal">
+
+        </div>
+    </div>
+</header>

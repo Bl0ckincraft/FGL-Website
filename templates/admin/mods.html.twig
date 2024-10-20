@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "admin.mods.title"|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <div id="admin" class="container mx-auto flex flex-col my-10">
+        <h1 class="title mx-auto mb-10" content="{{ "admin.mods.title"|trans }}">{{ "admin.mods.title"|trans }}</h1>
+
+        {{ form_start(form) }}
+            <div class="mx-auto">
+                <h1 class="mt-2 mb-5 text-center mx-4 title" content="{{ "admin.add"|trans }}">{{ "admin.add"|trans }}</h1>
+            </div>
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.modFile) }}
+
+            <button type="submit" class="my-3 mx-4">{{ "admin.add"|trans }}</button>
+        {{ form_end(form) }}
+
+        <table class="min-w-full divide-y mt-5">
+            <thead>
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                        Nom
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                        Taille
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                        SHA1
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="divide-y">
+            {% for mod in mods %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <a href="{{ path('api_get_mod', {'name': mod.name}) }}" class="mod-link">{{ mod.name }}</a>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ mod.size }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ mod.sha1 }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <a href="{{ path('app_admin_mods_edit', { name: mod.name }) }}" class="text-indigo-600 hover:text-indigo-900">Modifier</a>
+                        <a href="{{ path('app_admin_mods_delete', { name: mod.name }) }}" class="text-red-600 hover:text-red-900 ml-4">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="px-6 py-4 text-sm text-center">
+                        Aucune mod disponible.
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

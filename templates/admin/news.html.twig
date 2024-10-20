@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "admin.news.title"|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <div id="admin" class="container mx-auto flex flex-col my-10">
+        <h1 class="title mx-auto mb-10" content="{{ "admin.news.title"|trans }}">{{ "admin.news.title"|trans }}</h1>
+
+        {{ form_start(form) }}
+            <div class="mx-auto">
+                <h1 class="mt-2 mb-5 text-center mx-4 title" content="{{ "admin.add"|trans }}">{{ "admin.add"|trans }}</h1>
+            </div>
+
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/2 p-4">
+                    {{ form_row(form.title) }}
+                </div>
+
+                <div class="w-full md:w-1/2 p-4">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="w-full md:w-1/2 p-4">
+                    {{ form_row(form.layout) }}
+                </div>
+                <div class="w-full md:w-1/2 p-4">
+                    {{ form_row(form.epoch_millis) }}
+                </div>
+            </div>
+
+            <button type="submit" class="my-3 mx-4">{{ "admin.add"|trans }}</button>
+        {{ form_end(form) }}
+
+        <table class="min-w-full divide-y mt-5">
+            <thead>
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                    Titre
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                    Date
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-extrabold uppercase tracking-wider">
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody class="divide-y">
+            {% for new in news %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <a target="_blank" href="{{ path('api_get_news_image', {'id': new.id}) }}" class="mod-link">{{ new.id }}</a>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ new.title.text }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ new.date }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <a href="{{ path('app_admin_news_delete', { id: new.id }) }}" class="text-red-600 hover:text-red-900 ml-4">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="px-6 py-4 text-sm text-center">
+                        Aucune news disponible.
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

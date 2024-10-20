@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "login.title"|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex flex-col">
+        {% include 'partials/header.html.twig' %}
+
+        <div class="mx-auto my-auto container max-w-[800px]" id="security">
+            <div class="mx-4 my-[5.5rem]">
+                <form method="post">
+                    <h1 class="my-2 text-center mx-auto form-title" content="{{ "login"|trans }}">{{ "login"|trans }}</h1>
+
+                    <div>
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required placeholder="Votre email">
+                    </div>
+                    <div>
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" autocomplete="current-password" required placeholder="Votre mot de passe">
+                    </div>
+                    <div>
+                        <button type="submit" class="mb-2 mt-4">Se connecter</button>
+                    </div>
+
+                    <div class="my-3">
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="_remember_me" checked> Se souvenir de moi</label>
+                        </div>
+                    </div>
+
+                    <hr class="my-2">
+                    <div class="my-2">
+                        <a href="{{ path("app_login") }}" class="mb-3">Je n'ai pas encore de compte...</a>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}

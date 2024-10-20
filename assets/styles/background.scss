@@ -1,0 +1,107 @@
+#background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: var(--main-color);
+  z-index: -100;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  --bg--length: 0;
+  --bg--width: 0;
+  --bg--shadow-width: 0;
+  --bg--shadow-color: rgba(var(--accent-color-rgb), 0.03);
+  --bg--light-width: calc(var(--bg--width) / 3);
+  --bg--light-length: calc(var(--bg--length) / 2);
+
+  .box, .filled-path {
+    position: absolute;
+    background-color: var(--main-color-variant);
+  }
+
+  .box {
+    width: var(--bg--length);
+    height: var(--bg--length);
+    top: calc((var(--bg--j, 0) + 0.5) * (var(--bg--length) + var(--bg--width)) + var(--bg--width));
+    left: calc((var(--bg--i, 0) + 0.5) * (var(--bg--length) + var(--bg--width)) + var(--bg--width));
+    box-shadow: var(--bg--shadow);
+  }
+
+  .filled-path[side="right"] {
+    width: var(--bg--length);
+    height: var(--bg--width);
+    top: calc((var(--bg--j, 0) + 0.5) * (var(--bg--length) + var(--bg--width)));
+    left: calc((var(--bg--i, 0) + 0.5) * (var(--bg--length) + var(--bg--width)) + var(--bg--width));
+    --bg--shadow: calc(-1 * var(--bg--shadow-width)) 0 0 var(--bg--shadow-color), var(--bg--shadow-width) 0 0 var(--bg--shadow-color);
+    box-shadow: var(--bg--shadow);
+  }
+
+  .filled-path[side="down"] {
+    width: var(--bg--width);
+    height: var(--bg--length);
+    top: calc((var(--bg--j, 0) + 0.5) * (var(--bg--length) + var(--bg--width)) + var(--bg--width));
+    left: calc((var(--bg--i, 0) + 0.5) * (var(--bg--length) + var(--bg--width)));
+    --bg--shadow: 0 calc(-1 * var(--bg--shadow-width)) 0 var(--bg--shadow-color), 0 var(--bg--shadow-width) 0 var(--bg--shadow-color);
+    box-shadow: var(--bg--shadow);
+  }
+
+  .prev-light-part, .current-light-part {
+    background-color: var(--accent-color);
+    position: absolute;
+    box-shadow: 0 0 7px var(--accent-color),
+    0 0 21px var(--accent-color),
+    0 0 82px var(--accent-color),
+    0 0 102px var(--accent-color);
+
+    /* CURRENT LIGHT PART VARS */
+    --bg--base-from-top: calc((var(--bg--from-j, 0) + 0.5) * (var(--bg--length) + var(--bg--width))); /* Top position of "from" node */
+    --bg--diff-target-from-j: calc(var(--bg--target-j, 0) - var(--bg--from-j, 0)); /* Difference between "target" and "from" j index; 0 if light dont move verticaly, 1 if light move down, -1 if light move up */
+    --bg--diff-target-from-j-2: calc(var(--bg--diff-target-from-j, 0) * var(--bg--diff-target-from-j, 0)); /* Difference between "target" and "from" j index squared; 0 if light dont move verticaly, 1 else */
+    --bg--diff-target-from-j-2-1-2: calc((var(--bg--diff-target-from-j-2, 0) - 1) * (var(--bg--diff-target-from-j-2, 0) - 1)); /* Difference between "target" and "from" j index squared minus one and squared; 0 if light move verticaly, 1 else */
+
+    --bg--base-from-left: calc((var(--bg--from-i, 0) + 0.5) * (var(--bg--length) + var(--bg--width))); /* Left position of "from" node */
+    --bg--diff-target-from-i: calc(var(--bg--target-i, 0) - var(--bg--from-i, 0)); /* Difference between "target" and "from" i index; 0 if light dont move horizontaly, 1 if light move right, -1 if light move left */
+    --bg--diff-target-from-i-2: calc(var(--bg--diff-target-from-i, 0) * var(--bg--diff-target-from-i, 0)); /* Difference between "target" and "from" j index squared; 0 if light dont move horizontaly, 1 else */
+    --bg--diff-target-from-i-2-1-2: calc((var(--bg--diff-target-from-i-2, 0) - 1) * (var(--bg--diff-target-from-i-2, 0) - 1)); /* Difference between "target" and "from" j index squared minus one and squared; 0 if light move horizontaly, 1 else */
+
+    --bg--current-part-calculated-height: min(calc(var(--bg--light-length)), calc(var(--bg--diff-target-from-j-2-1-2, 0) * var(--bg--light-width, 0) + (var(--bg--diff-target-from-j-2, 0) * (var(--bg--length, 0) + var(--bg--width, 0)) * (var(--bg--progress, 0) / 100)) + var(--bg--diff-target-from-j-2) * var(--bg--light-width)));
+    --bg--current-part-calculated-width: min(calc(var(--bg--light-length)), calc(var(--bg--diff-target-from-i-2-1-2, 0) * var(--bg--light-width, 0) + (var(--bg--diff-target-from-i-2, 0) * (var(--bg--length, 0) + var(--bg--width, 0)) * (var(--bg--progress, 0) / 100)) + var(--bg--diff-target-from-i-2) * var(--bg--light-width)));
+    --bg--current-part-calculated-top: calc(var(--bg--base-from-top, 0) + var(--bg--diff-target-from-j, 0) * (var(--bg--length, 0) + var(--bg--width, 0)) * (var(--bg--progress, 0) / 100.0) + var(--bg--diff-target-from-j) * ((var(--bg--width) - var(--bg--light-width)) / 2) + var(--bg--diff-target-from-j-2-1-2) * ((var(--bg--width) - var(--bg--light-width)) / 2) - var(--bg--diff-target-from-j-2) * ((var(--bg--diff-target-from-j) + 1) / 2) * var(--bg--current-part-calculated-height) + var(--bg--width) * var(--bg--diff-target-from-j-2) * (-1 * (var(--bg--diff-target-from-j) - 1) / 2) + var(--bg--diff-target-from-j) * var(--bg--light-width));
+    --bg--current-part-calculated-left: calc(var(--bg--base-from-left, 0) + var(--bg--diff-target-from-i, 0) * (var(--bg--length, 0) + var(--bg--width, 0)) * (var(--bg--progress, 0) / 100.0) + var(--bg--diff-target-from-i) * ((var(--bg--width) - var(--bg--light-width)) / 2) + var(--bg--diff-target-from-i-2-1-2) * ((var(--bg--width) - var(--bg--light-width)) / 2) - var(--bg--diff-target-from-i-2) * ((var(--bg--diff-target-from-i) + 1) / 2) * var(--bg--current-part-calculated-width) + var(--bg--width) * var(--bg--diff-target-from-i-2) * (-1 * (var(--bg--diff-target-from-i) - 1) / 2) + var(--bg--diff-target-from-i) * var(--bg--light-width));
+
+    /* PREVIOUS LIGHT PART VARS */
+    /* SIMILAR VARS */
+    --bg--base-prev-top: calc((var(--bg--prev-j, 0) + 0.5) * (var(--bg--length) + var(--bg--width)));
+    --bg--diff-from-prev-j: calc(var(--bg--from-j, 0) - var(--bg--prev-j, 0));
+    --bg--diff-from-prev-j-2: calc(var(--bg--diff-from-prev-j, 0) * var(--bg--diff-from-prev-j, 0));
+    --bg--diff-from-prev-j-2-1-2: calc((var(--bg--diff-from-prev-j-2, 0) - 1) * (var(--bg--diff-from-prev-j-2, 0) - 1));
+
+    --bg--base-prev-left: calc((var(--bg--prev-i, 0) + 0.5) * (var(--bg--length) + var(--bg--width)));
+    --bg--diff-from-prev-i: calc(var(--bg--from-i, 0) - var(--bg--prev-i, 0));
+    --bg--diff-from-prev-i-2: calc(var(--bg--diff-from-prev-i, 0) * var(--bg--diff-from-prev-i, 0));
+    --bg--diff-from-prev-i-2-1-2: calc((var(--bg--diff-from-prev-i-2, 0) - 1) * (var(--bg--diff-from-prev-i-2, 0) - 1));
+
+    --bg--prev-part-calculated-height: calc(var(--bg--diff-from-prev-j-2-1-2, 0) * var(--bg--light-width, 0) + (var(--bg--diff-from-prev-j-2, 0) * (var(--bg--light-length) - var(--bg--current-part-calculated-height) * var(--bg--diff-target-from-j-2) - var(--bg--current-part-calculated-width) * var(--bg--diff-target-from-i-2))));
+    --bg--prev-part-calculated-width: calc(var(--bg--diff-from-prev-i-2-1-2, 0) * var(--bg--light-width, 0) + (var(--bg--diff-from-prev-i-2, 0) * (var(--bg--light-length) - var(--bg--current-part-calculated-height) * var(--bg--diff-target-from-j-2) - var(--bg--current-part-calculated-width) * var(--bg--diff-target-from-i-2))));
+    --bg--prev-part-calculated-top: calc(var(--bg--base-prev-top, 0) + var(--bg--diff-from-prev-j, 0) * (var(--bg--length, 0) + var(--bg--width, 0)) * ((var(--bg--progress, 0)) / 100.0) + var(--bg--diff-from-prev-j) * ((var(--bg--width) - var(--bg--light-width)) / 2) + var(--bg--diff-from-prev-j-2-1-2) * ((var(--bg--width) - var(--bg--light-width)) / 2) + var(--bg--diff-from-prev-j-2) * ((var(--bg--diff-from-prev-j) - 1) / 2) * var(--bg--prev-part-calculated-height) + var(--bg--width) * var(--bg--diff-from-prev-j-2) * (-1 * (var(--bg--diff-from-prev-j) - 1) / 2) + var(--bg--diff-from-prev-j) * (var(--bg--length) + var(--bg--width) - var(--bg--light-length) + var(--bg--light-width)));
+    --bg--prev-part-calculated-left: calc(var(--bg--base-prev-left, 0) + var(--bg--diff-from-prev-i, 0) * (var(--bg--length, 0) + var(--bg--width, 0)) * ((var(--bg--progress, 0)) / 100.0) + var(--bg--diff-from-prev-i) * ((var(--bg--width) - var(--bg--light-width)) / 2) + var(--bg--diff-from-prev-i-2-1-2) * ((var(--bg--width) - var(--bg--light-width)) / 2) + var(--bg--diff-from-prev-i-2) * ((var(--bg--diff-from-prev-i) - 1) / 2) * var(--bg--prev-part-calculated-width) + var(--bg--width) * var(--bg--diff-from-prev-i-2) * (-1 * (var(--bg--diff-from-prev-i) - 1) / 2) + var(--bg--diff-from-prev-i) * (var(--bg--length) + var(--bg--width) - var(--bg--light-length) + var(--bg--light-width)));
+  }
+
+  .prev-light-part {
+    height: var(--bg--prev-part-calculated-height);
+    width: var(--bg--prev-part-calculated-width);
+    top: var(--bg--prev-part-calculated-top);
+    left: var(--bg--prev-part-calculated-left);
+  }
+
+  .current-light-part {
+    height: var(--bg--current-part-calculated-height);
+    width: var(--bg--current-part-calculated-width);
+    top: var(--bg--current-part-calculated-top);
+    left: var(--bg--current-part-calculated-left);
+  }
+}
