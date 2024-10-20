@@ -117,7 +117,7 @@ class JwtAuthController extends AbstractController
                 "name" => $mod->getName().'.jar',
                 "sha1" => $mod->getSha1(),
                 "size" => $mod->getSize(),
-                "downloadURL" => $baseUrl.$this->generateUrl("api_get_mod", ["name" => $mod->getName()])
+                "downloadURL" => 'https://'.$baseUrl.$this->generateUrl("api_get_mod", ["name" => $mod->getName()])
             ];
         }
 
@@ -147,7 +147,7 @@ class JwtAuthController extends AbstractController
                     "color" => $newsIn->getDescription()->getColor(),
                 ],
                 "layout" => [
-                    "image" => $baseUrl.$this->generateUrl("api_get_news_image", ["id" => $newsIn->getId()]),
+                    "image" => 'https://'.$baseUrl.$this->generateUrl("api_get_news_image", ["id" => $newsIn->getId()]),
                     "min_height" => $newsIn->getLayout()->getMinHeight(),
                     "max_width" => $newsIn->getLayout()->getMaxWidth(),
                     "text_alignment" => $newsIn->getLayout()->getTextAlignment(),
