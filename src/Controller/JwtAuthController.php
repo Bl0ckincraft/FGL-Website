@@ -108,6 +108,7 @@ class JwtAuthController extends AbstractController
     #[Route(path: '/api/mods', name: 'api_mods', methods: ["GET"])]
     public function mods(Request $request): JsonResponse
     {
+        dd($request);
         $mods = [];
         /** @var string $baseUrl */
         $baseUrl = $request->server->get("SYMFONY_DEFAULT_ROUTE_URL");
