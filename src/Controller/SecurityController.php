@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Uid\Uuid;
+use function Symfony\Component\Translation\t;
 
 class SecurityController extends AbstractAppController
 {
@@ -40,19 +41,46 @@ class SecurityController extends AbstractAppController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordHasher->hashPassword($user, $user->getPassword());
-            $user->setPassword($password);
+            $valid = true;
 
-            do {
-                $uuid = Uuid::v4();
-                $existingUuid = $this->entityManager->getRepository(User::class)->findOneBy(['uuid' => $uuid]);
-            } while ($existingUuid !== null);
-            $user->setUuid($uuid);
+            if (!preg_match('/^[a-zA-Z0-9_]{3,16}$/', $user->getUsername())) {
+                $this->addNotification(NotificationType::ERROR, "Le nom d'utilisateur doit uniquement contenir des lettres, des chiffres ou des underscores.");
+                $valid = false;
+            } else if ($this->entityManager->getRepository(User::class)
+                ->createQueryBuilder('u')
+                ->where('LOWER(u.username) = :username')
+                ->setParameter('username', strtolower($user->getUsername()))
+                ->getQuery()
+                ->getOneOrNullResult()) {
+                $this->addNotification(NotificationType::ERROR, "Ce nom d'utilisateur est déjà utilisé.");
+                $valid = false;
+            }
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            if ($this->entityManager->getRepository(User::class)
+                ->createQueryBuilder('u')
+                ->where('LOWER(u.email) =:email')
+                ->setParameter('email', strtolower($user->getEmail()))
+                ->getQuery()
+                ->getOneOrNullResult()) {
+                $this->addNotification(NotificationType::ERROR, "Cette adresse email est déjà utilisée.");
+                $valid = false;
+            }
 
-            return $this->redirectToRoute('app_login', $request->query->all());
+            if ($valid) {
+                $password = $passwordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
+
+                do {
+                    $uuid = Uuid::v4();
+                    $existingUuid = $this->entityManager->getRepository(User::class)->findOneBy(['uuid' => $uuid]);
+                } while ($existingUuid !== null);
+                $user->setUuid($uuid);
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('app_login', $request->query->all());
+            }
         }
 
         return $this->render('security/register.html.twig', [

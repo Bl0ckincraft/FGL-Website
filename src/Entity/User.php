@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(type: Types::INTEGER)]
-    private ?int $lastJwt = null;
+    private int $lastJwt = 0;
 
     public function getId(): ?int
     {
@@ -147,7 +147,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastJwt(): ?int
+    public function getLastJwt(): int
     {
         return $this->lastJwt;
     }
